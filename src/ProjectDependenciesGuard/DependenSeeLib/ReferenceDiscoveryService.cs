@@ -6,7 +6,7 @@ using System.Xml;
 
 namespace DependenSee
 {
-    public class ReferenceDiscoveryService
+    internal class ReferenceDiscoveryService
     {
         public string SourceFolder { get; set; }
         public bool FollowReparsePoints { get; set; }
