@@ -29,6 +29,7 @@ jobs:
         dotnet tool install --global dotnet-sonarscanner
         export PATH="$PATH:/home/runner/.dotnet/tools"
     - name: Dotnet restore
+      working-directory: src
       run: dotnet restore
     - name: Build and analyze
       working-directory: src
