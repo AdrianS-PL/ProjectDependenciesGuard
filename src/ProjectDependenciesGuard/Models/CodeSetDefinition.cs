@@ -30,5 +30,14 @@
             CodeSetType = codeSetType;
             Name = name;
         }
+
+        /// <summary>
+        /// Converts the value of this instance to its equivalent string representation.
+        /// </summary>
+        /// <returns>The string representation of the value of this instance.</returns>
+        public override string ToString()
+        {
+            return "[" + CodeSetType.ToString() + "] " + Name;
+        }
     }
 }

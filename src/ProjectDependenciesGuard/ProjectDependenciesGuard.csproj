@@ -2,7 +2,7 @@
 
 	<PropertyGroup>
 		<TargetFramework>netstandard2.1</TargetFramework>
-		<Version>0.1.2</Version>
+		<Version>0.2.0</Version>
 		<Authors>Adrian Sauer</Authors>
 		<Product>ProjectDependenciesGuard</Product>
 		<Description>A fluent API for .NET Standard 2.1 that can enforce dependency rules and detect transitive dependencies in unit tests.</Description>
@@ -14,8 +14,8 @@
 		<PackageTags>test architecture project dependencies transitive csproj</PackageTags>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
-		<AssemblyVersion>0.1.2.0</AssemblyVersion>
-		<FileVersion>0.1.2.0</FileVersion>
+		<AssemblyVersion>0.2.0.0</AssemblyVersion>
+		<FileVersion>0.2.0.0</FileVersion>
 	</PropertyGroup>
 
 	<ItemGroup>

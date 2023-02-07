@@ -26,5 +26,14 @@ namespace ProjectDependenciesGuard
         {
             return new Condition(_graph, _verticesToTest);
         }
+
+        /// <summary>
+        /// Gets all vertices of code sets graph that match specified predicate.
+        /// </summary>
+        /// <returns>All vertices of code sets graph that match specified predicate.</returns>
+        public IEnumerable<CodeSetDefinition> GetCodeSetDefinitions()
+        {
+            return _verticesToTest;
+        }
     }
 }
