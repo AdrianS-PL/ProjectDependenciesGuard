@@ -160,6 +160,9 @@ namespace DependenSee
             foreach (XmlNode node in projectReferenceNodes)
             {
                 var referencePath = node.Attributes["Include"].Value;
+                if (Path.DirectorySeparatorChar == '/')
+                    referencePath = referencePath.Replace('\\', '/');
+
                 var fullPath = Path.GetFullPath(referencePath, basePath);
 
                 string filename = Path.GetFileNameWithoutExtension(fullPath);
