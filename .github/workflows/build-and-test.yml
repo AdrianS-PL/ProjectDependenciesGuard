@@ -1,0 +1,50 @@
+name: Build and test
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+jobs:
+  build:
+    name: Build and test
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+    - uses: actions/setup-dotnet@v2
+      with:
+        dotnet-version: "6.0.x"
+    - uses: actions/setup-java@v1
+      with:
+        java-version: 1.11
+    - name: Cache SonarCloud packages
+      uses: actions/cache@v1
+      with:
+        path: ~\sonar\cache
+        key: ${{ runner.os }}-sonar
+        restore-keys: ${{ runner.os }}-sonar
+    - name: Install SonarCloud scanner
+      run: |
+        dotnet tool install --global dotnet-sonarscanner
+        export PATH="$PATH:/home/runner/.dotnet/tools"
+    - name: Dotnet restore
+      run: dotnet restore
+    - name: Build and analyze
+      working-directory: src
+      env:
+        GITHUB_TOKEN: ${{ secrets.SONAR_GITHUB_TOKEN }}
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      run: |
+        export PATH="$PATH:/home/runner/.dotnet/tools"
+        dotnet-sonarscanner begin \
+        /k:"AdrianS-PL_ProjectDependenciesGuard" \
+        /o:"adrian-sauer" \
+        /d:sonar.login="${{ secrets.SONAR_TOKEN }}" \
+        /d:sonar.host.url="https://sonarcloud.io"
+        dotnet build --no-restore
+        dotnet test --no-restore
+        dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
+
+        
+      
