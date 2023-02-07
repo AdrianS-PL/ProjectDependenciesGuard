@@ -5,11 +5,13 @@ namespace ProjectDependenciesGuard.Tests.Integration;
 public class Tests
 {
     private const string SlnFileName = "TestApp.sln";
+    private const string X = @"..\..\..\..\..\..\TestApp";
+    private readonly string RelativePathToSlnDir = ".." + Path.DirectorySeparatorChar + ".." + Path.DirectorySeparatorChar + ".." + Path.DirectorySeparatorChar + ".." + Path.DirectorySeparatorChar + ".." + Path.DirectorySeparatorChar + ".." + Path.DirectorySeparatorChar + "TestApp";
 
     [Fact]
     public void Should_DetectDuplicateTransitiveDependencies()
     {
-        var result = DependencyGuard.ProjectsAndPackagesInPath(@"..\..\..\..\..\..\TestApp", SlnFileName)
+        var result = DependencyGuard.ProjectsAndPackagesInPath(RelativePathToSlnDir, SlnFileName)
             .Should().NotHaveDuplicateTransitiveDependencies().GetResult();
 
         Assert.False(result.IsSuccessful);
@@ -24,7 +26,7 @@ public class Tests
         Func<CodeSetDefinition, CodeSetDefinition, bool> allowedUnitTestProjectsDependenciesPredicate = (testedProject, dependency) => dependency.CodeSetType == CodeSetType.Package ||
             (dependency.CodeSetType == CodeSetType.Project && (dependency.Name + ".Tests.Unit" == testedProject.Name));
 
-        var result = DependencyGuard.ProjectsAndPackagesInPath(@"..\..\..\..\..\..\TestApp", SlnFileName).That()
+        var result = DependencyGuard.ProjectsAndPackagesInPath(RelativePathToSlnDir, SlnFileName).That()
             .MatchPredicate(q => q.Name.EndsWith(".Tests.Unit") && q.CodeSetType == CodeSetType.Project)
             .Should().OnlyDependOnSetsMatchingPredicate(allowedUnitTestProjectsDependenciesPredicate).GetResult();
 
@@ -39,7 +41,7 @@ public class Tests
         Func<CodeSetDefinition, CodeSetDefinition, bool> allowedUnitTestProjectsDependenciesPredicate = (testedProject, dependency) => dependency.CodeSetType == CodeSetType.Package ||
             (dependency.CodeSetType == CodeSetType.Project && (dependency.Name + ".Tests.Unit" == testedProject.Name));
 
-        var result = DependencyGuard.ProjectsAndPackagesInPath(@"..\..\..\..\..\..\TestApp", SlnFileName).That()
+        var result = DependencyGuard.ProjectsAndPackagesInPath(RelativePathToSlnDir, SlnFileName).That()
             .MatchPredicate(q => q.Name.EndsWith(".Tests.Unit") && q.CodeSetType == CodeSetType.Project)
             .Should().DependOn("xunit", CodeSetType.Package).GetResult();
 
