@@ -5,8 +5,8 @@ namespace ProjectDependenciesGuard.Tests.Integration;
 public class Tests
 {
     private const string SlnFileName = "TestApp.sln";
-    private const string X = @"..\..\..\..\..\..\TestApp";
-    private readonly string RelativePathToSlnDir = ".." + Path.DirectorySeparatorChar + ".." + Path.DirectorySeparatorChar + ".." + Path.DirectorySeparatorChar + ".." + Path.DirectorySeparatorChar + ".." + Path.DirectorySeparatorChar + ".." + Path.DirectorySeparatorChar + "TestApp";
+    private readonly string RelativePathToSlnDir = Path.Combine("..", "..", "..", "..", "..", "..", "TestApp");
+    //private readonly string RelativePathToSlnDir = ".." + Path.DirectorySeparatorChar + ".." + Path.DirectorySeparatorChar + ".." + Path.DirectorySeparatorChar + ".." + Path.DirectorySeparatorChar + ".." + Path.DirectorySeparatorChar + ".." + Path.DirectorySeparatorChar + "TestApp";
 
     [Fact]
     public void Should_DetectDuplicateTransitiveDependencies()
