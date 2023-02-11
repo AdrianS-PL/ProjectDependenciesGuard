@@ -5,6 +5,10 @@ on:
       - master
   workflow_dispatch:
   pull_request:
+permissions:
+  id-token: write
+  contents: read
+  checks: write
 jobs:
   build:
     name: Build and test
@@ -43,10 +47,18 @@ jobs:
         /k:"AdrianS-PL_ProjectDependenciesGuard" \
         /o:"adrian-sauer" \
         /d:sonar.login="${{ secrets.SONAR_TOKEN }}" \
-        /d:sonar.host.url="https://sonarcloud.io"
+        /d:sonar.host.url="https://sonarcloud.io" \
+        /d:sonar.cs.opencover.reportsPaths="TestResults/**/coverage.opencover.xml"
         dotnet build --no-restore
-        dotnet test --no-restore
+        dotnet test --no-restore --settings coverlet.runsettings --results-directory:"./TestResults/" --logger "trx"
         dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
+    - name: Unit tests report
+      uses: dorny/test-reporter@v1
+      if: success() || failure()
+      with:
+        name: Unit tests report
+        path: src/TestResults/*.trx
+        reporter: dotnet-trx
 
         
       
