@@ -43,9 +43,10 @@ jobs:
         /k:"AdrianS-PL_ProjectDependenciesGuard" \
         /o:"adrian-sauer" \
         /d:sonar.login="${{ secrets.SONAR_TOKEN }}" \
-        /d:sonar.host.url="https://sonarcloud.io"
+        /d:sonar.host.url="https://sonarcloud.io" \
+        /d:sonar.cs.opencover.reportsPaths="**/coverage.opencover.xml"
         dotnet build --no-restore
-        dotnet test --no-restore
+        dotnet test --no-restore --settings coverlet.runsettings --results-directory:"./TestResults/"
         dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
 
         
