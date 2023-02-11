@@ -26,11 +26,10 @@ namespace ProjectDependenciesGuard
             {
                 pathToRootDir = Path.GetFullPath(Directory.GetCurrentDirectory() + pathToRootDir);
             }
-
-            if (!string.IsNullOrWhiteSpace(existenceCheckFileName))
+            
+            if (!string.IsNullOrWhiteSpace(existenceCheckFileName) && !new DirectoryInfo(pathToRootDir).EnumerateFiles().Any(q => q.Name == existenceCheckFileName))
             {
-                if (!new DirectoryInfo(pathToRootDir).EnumerateFiles().Any(q => q.Name == existenceCheckFileName))
-                    throw new ArgumentException($"File {existenceCheckFileName} does not exist in directory {pathToRootDir}");
+                throw new ArgumentException($"File {existenceCheckFileName} does not exist in directory {pathToRootDir}");
             }
 
 

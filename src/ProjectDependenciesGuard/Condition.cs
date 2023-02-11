@@ -140,7 +140,7 @@ namespace ProjectDependenciesGuard
         {
             var dependent = VerticesDependentOn(name, type);
 
-            if (dependent.Count() == 0)
+            if (dependent.Any())
             {
                 return new ConditionResult(TestResult.Success());
             }
@@ -167,7 +167,7 @@ namespace ProjectDependenciesGuard
                 dfs.Compute();
                 dfs.TreeEdge -= recorder.RecordTreeEdge;
 
-                if (recorder.FoundEdges.Count > 0)
+                if (recorder.FoundEdges.Any())
                     dependent.Add(testedCodeSet);
             }
 
