@@ -1,5 +1,7 @@
 # ProjectDependenciesGuard
 
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=AdrianS-PL_ProjectDependenciesGuard&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=AdrianS-PL_ProjectDependenciesGuard)
+
 A fluent API for .NET Standard 2.1 that can be used in unit tests to:
 - Enforce project and package dependencies rules.
 - Find duplicate transitive dependencies.
