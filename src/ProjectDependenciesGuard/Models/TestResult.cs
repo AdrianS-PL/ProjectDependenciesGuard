@@ -26,7 +26,7 @@ namespace ProjectDependenciesGuard.Models
         {
             get
             {
-                return _failingCodeSets?.ToList() ?? new List<FailingCodeSet>();
+                return _failingCodeSets ?? new List<FailingCodeSet>();
             }
         }
 
