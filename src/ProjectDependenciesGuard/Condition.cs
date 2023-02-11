@@ -140,7 +140,7 @@ namespace ProjectDependenciesGuard
         {
             var dependent = VerticesDependentOn(name, type);
 
-            if (dependent.Any())
+            if (!dependent.Any())
             {
                 return new ConditionResult(TestResult.Success());
             }
