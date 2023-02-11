@@ -5,6 +5,10 @@ on:
       - master
   workflow_dispatch:
   pull_request:
+permissions:
+  id-token: write
+  contents: read
+  checks: write
 jobs:
   build:
     name: Build and test
