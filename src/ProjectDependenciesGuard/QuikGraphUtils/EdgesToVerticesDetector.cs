@@ -7,10 +7,10 @@ namespace ProjectDependenciesGuard.QuikGraphUtils
 {
     internal class EdgesToVerticesDetector
     {
-        private List<Edge<CodeSetDefinition>> _foundEdges = new List<Edge<CodeSetDefinition>>();
-        private List<CodeSetDefinition> _targetVertices;
+        private readonly List<Edge<CodeSetDefinition>> _foundEdges = new List<Edge<CodeSetDefinition>>();
+        private readonly List<CodeSetDefinition> _targetVertices;
 
-        public List<Edge<CodeSetDefinition>> FoundEdges => _foundEdges.ToList();
+        public IEnumerable<Edge<CodeSetDefinition>> FoundEdges => _foundEdges;
 
 
         public EdgesToVerticesDetector(IEnumerable<CodeSetDefinition> targetVertices)

@@ -10,8 +10,8 @@ namespace ProjectDependenciesGuard.QuikGraphUtils
         private readonly string _targetName;
         private readonly CodeSetType _targetType;
 
-        private List<Edge<CodeSetDefinition>> _foundEdges = new List<Edge<CodeSetDefinition>>();
-        public List<Edge<CodeSetDefinition>> FoundEdges => _foundEdges.ToList();
+        private readonly List<Edge<CodeSetDefinition>> _foundEdges = new List<Edge<CodeSetDefinition>>();
+        public IEnumerable<Edge<CodeSetDefinition>> FoundEdges => _foundEdges;
 
         public EdgesToTargetDetector(string targetName, CodeSetType targetType)
         {

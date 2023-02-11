@@ -29,13 +29,6 @@ namespace DependenSee
             return result;
         }
 
-        private static string[] ParseStringToLowercaseStringArray(string list) =>
-            string.IsNullOrWhiteSpace(list)
-            ? Array.Empty<string>()
-            : list.Split(',', StringSplitOptions.RemoveEmptyEntries)
-                .Select(e => e.Trim().ToLower())
-                .ToArray();
-
         private void Discover(string folder, DiscoveryResult result)
         {
             var info = new DirectoryInfo(folder);
